@@ -1,0 +1,42 @@
+{
+  "screenName": {
+    "profile": "Profile",
+    "settings": "Settings",
+    "login": "Login",
+    "home": "Home",
+    "menu": "Menu"
+  },
+  "menuScreen": {
+    "accountSettings": "Account Settings",
+    "profileManagement": "Profile Management",
+    "notificationsPreference": "Notifications Preference",
+    "language": "Language",
+    "darkMode": "Dark Mode",
+    "lightMode": "Light Mode",
+    "appearanceSettings": "Appearance Settings",
+    "accessibility": "Accessibility",
+    "helpSupport": "Help & Support",
+    "faqs": "FAQs",
+    "contactUs": "Contact Us",
+    "privacyPolicy": "Privacy policy",
+    "logout": "Logout"
+  },
+  "readMore": "Read More",
+  "explore": "Explore",
+  "viewAll": "View All",
+  "clearButton": "Clear",
+  "submitButton": "Submit",
+  "fullNameLabel": "Full name",
+  "fullNamePlaceholder": "Enter full name",
+  "emailLabel": "Email",
+  "emailPlaceholder": "myemail@email.com",
+  "phoneNumberLabel": "Phone Number",
+  "phoneNumberPlaceholder": "+20XXXXXXXX",
+  "errorMessage": "Something went wrong",
+  "doneButton": "Done",
+  "phoneNumber": "Phone Number",
+  "emailAddress": "Email Address",
+  "profileInfo": "Profile Info",
+  "details": "Details",
+  "profile": "Profile"
+}

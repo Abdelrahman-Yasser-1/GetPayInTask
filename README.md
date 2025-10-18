@@ -1,97 +1,193 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# GetPayInTask - React Native 3 Pages Store
 
-# Getting Started
+A React Native app that implements a minimal store with authentication, auto-lock, biometrics, and offline capabilities using DummyJSON API.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## Features
 
-## Step 1: Start Metro
+- **Authentication**: Login via DummyJSON API with session restoration
+- **Auto-lock**: App locks after 10 seconds of inactivity or when backgrounded
+- **Biometric Unlock**: Face ID/Touch ID with password fallback
+- **Offline Support**: React Query cache persisted with MMKV for instant offline access
+- **Super Admin**: Special privileges for deleting products (username: `superadmin`)
+- **Modern UI**: Clean, responsive design with pull-to-refresh
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## Screens
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+1. **Login Screen**: DummyJSON authentication with demo login
+2. **All Products Screen**: Product list with delete functionality for superadmin
+3. **Specific Category Screen**: Filtered product list by category
 
-```sh
-# Using npm
-npm start
+## Tech Stack
 
-# OR using Yarn
-yarn start
+- React Native 0.82.0
+- TypeScript
+- React Navigation (Stack + Bottom Tabs)
+- React Query (TanStack Query) with MMKV persistence
+- Redux Toolkit for state management
+- React Native Biometrics
+- MMKV for secure storage
+- NetInfo for network status
+
+## Setup Instructions
+
+### Prerequisites
+
+- Node.js >= 20.19.4
+- React Native CLI
+- iOS Simulator (for iOS development)
+- Android Studio (for Android development)
+
+### Installation
+
+1. **Clone and install dependencies:**
+
+   ```bash
+   git clone <repository-url>
+   cd GetPayInTask
+   npm install
+   ```
+
+2. **iOS Setup:**
+
+   ```bash
+   cd ios
+   pod install
+   cd ..
+   ```
+
+3. **Run the app:**
+
+   ```bash
+   # iOS
+   npm run ios
+
+   # Android
+   npm run android
+   ```
+
+## Configuration
+
+### Super Admin User
+
+- **Username**: `superadmin`
+- **Password**: `123456`
+- **Privileges**: Can delete products from the All Products screen
+
+### Chosen Category
+
+- **Category**: `smartphones`
+- **Reason**: Popular category with good product variety for demonstration
+
+### Demo Credentials
+
+- Use any username/password combination to login
+- The app uses DummyJSON's test authentication
+- Superadmin username grants special delete privileges
+
+## API Endpoints Used
+
+- `POST /auth/login` - User authentication
+- `GET /auth/me` - Session validation
+- `GET /products` - All products
+- `GET /products/categories` - Product categories
+- `GET /products/category/{category}` - Products by category
+- `DELETE /products/{id}` - Delete product (simulated)
+
+## Architecture
+
+### Folder Structure
+
+```
+src/
+├── components/          # Reusable UI components
+├── hooks/              # Custom React hooks
+├── navigation/         # Navigation configuration
+├── screens/            # Screen components
+├── services/           # API and external services
+├── store/              # Redux store and slices
+├── types/              # TypeScript type definitions
+└── utils/              # Utility functions
 ```
 
-## Step 2: Build and run your app
+### State Management
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+- **Redux Toolkit**: Global app state (auth, app lock status)
+- **React Query**: Server state and caching
+- **MMKV**: Persistent storage for tokens and cache
 
-### Android
+### Security Features
 
-```sh
-# Using npm
-npm run android
+- Encrypted token storage with MMKV
+- Biometric authentication with password fallback
+- Auto-lock on inactivity and background
+- Secure API communication
 
-# OR using Yarn
-yarn android
+## Key Features Implementation
+
+### Auto-lock System
+
+- Monitors user activity and app state
+- Locks after 10 seconds of inactivity
+- Locks immediately when app goes to background
+- Resets timer on user interaction
+
+### Offline Support
+
+- React Query cache persisted to MMKV
+- Instant loading of cached data on app restart
+- Network status indicator
+- Graceful degradation when offline
+
+### Biometric Authentication
+
+- Face ID/Touch ID support
+- Password fallback when biometrics unavailable
+- Secure authentication flow
+- Proper error handling
+
+## Trade-offs and Future Improvements
+
+### Current Trade-offs
+
+1. **Simple Password Fallback**: Uses hardcoded password for demo purposes
+2. **Basic Error Handling**: Limited error UI and retry mechanisms
+3. **No Dark Mode**: Single theme implementation
+4. **Limited Testing**: Basic test coverage
+
+### If I Had More Time
+
+1. **Enhanced Security**: Implement proper password hashing and secure storage
+2. **Advanced Error Handling**: Toast notifications, retry mechanisms, offline queue
+3. **Dark Mode**: Complete theming system with user preferences
+4. **Comprehensive Testing**: Unit tests, integration tests, E2E tests
+5. **Performance Optimization**: Image caching, lazy loading, memory optimization
+6. **Accessibility**: Screen reader support, accessibility labels
+7. **Analytics**: User behavior tracking and crash reporting
+
+## Testing
+
+Run tests with:
+
+```bash
+npm test
 ```
+
+## Build
 
 ### iOS
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
+```bash
+cd ios
+xcodebuild -workspace GetPayInTask.xcworkspace -scheme GetPayInTask -configuration Release
 ```
 
-Then, and every time you update your native dependencies, run:
+### Android
 
-```sh
-bundle exec pod install
+```bash
+cd android
+./gradlew assembleRelease
 ```
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+## License
 
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
-
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+This project is for demonstration purposes as part of a coding challenge.

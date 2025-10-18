@@ -1,0 +1,251 @@
+const neutralColors = {
+  gray8: '#FFFFFFCC',
+  gray10: '#FFFFFF33',
+  gray15: '#FFFFFF99',
+  gray20: '#FFFFFF66',
+  gray25: '#FCFCFD',
+  gray50: '#F9FAFB',
+  gray100: '#F3F4F6',
+  gray200: '#E5E7EB',
+  gray300: '#D2D6DB',
+  gray400: '#9DA4AE',
+  gray500: '#6C737F',
+  gray600: '#4D5761',
+  gray700: '#384250',
+  gray800: '#1F2A37',
+  gray900: '#111927',
+  gray950: '#0D121C',
+  gray1000: '#161616',
+};
+
+const primaryColors = {
+  SA25: '#F7FDF9',
+  SA50: '#F3FCF6',
+  SA100: '#DFF6E7',
+  SA200: '#B8EACB',
+  SA300: '#88D8AD',
+  SA400: '#54C08A',
+  SA500: '#25935F',
+  SA600: '#1B8354',
+  SA700: '#166A45',
+  SA800: '#14573A',
+  SA900: '#104631',
+  SA950: '#092A1E',
+};
+
+const secondaryGoldColors = {
+  gold25: '#FFFEF7',
+  gold50: '#FFFEF2',
+  gold100: '#FFFCE6',
+  gold200: '#FCF3BD',
+  gold300: '#FAE996',
+  gold400: '#F7D54D',
+  gold500: '#F5BD02',
+  gold600: '#DBA102',
+  gold700: '#B87B02',
+  gold800: '#945C01',
+  gold900: '#6E3C00',
+  gold950: '#472400',
+};
+
+const secondaryLavenderColors = {
+  lavender25: '#FEFCFF',
+  lavender50: '#F9F5FA',
+  lavender100: '#F2E9F5',
+  lavender200: '#E1CCE8',
+  lavender300: '#CCADD9',
+  lavender400: '#A57BBA',
+  primary500: '#80519F',
+  lavender600: '#6D428F',
+  lavender700: '#532D75',
+  lavender800: '#3D1D5E',
+  lavender900: '#281047',
+  lavender950: '#16072E',
+};
+
+const semanticErrorColors = {
+  error25: '#FFFBFA',
+  error50: '#FEF3F2',
+  error100: '#FEE4E2',
+  error200: '#FECDCA',
+  error300: '#FDA29B',
+  error400: '#F97066',
+  error500: '#F04438',
+  error600: '#D92D20',
+  error700: '#B42318',
+  error800: '#912018',
+  error900: '#7A271A',
+  error950: '#55160C',
+};
+const semanticWarningColors = {
+  warning25: '#FFFCF5',
+  warning50: '#FFFAEB',
+  warning100: '#FEF0C7',
+  warning200: '#FEDF89',
+  warning300: '#FEC84B',
+  warning400: '#FDB022',
+  warning500: '#F04438',
+  warning600: '#DC6803',
+  warning700: '#B54708',
+  warning800: '#93370D',
+  warning900: '#7A2E0E',
+  warning950: '#4E1D09',
+};
+
+const semanticInfoColors = {
+  info25: '#F5FAFF',
+  info50: '#EFF8FF',
+  info100: '#D1E9FF',
+  info200: '#B2DDFF',
+  info300: '#84CAFF',
+  info400: '#53B1FD',
+  info500: '#2E90FA',
+  info600: '#1570EF',
+  info700: '#175CD3',
+  info800: '#1849A9',
+  info900: '#194185',
+  info950: '#102A56',
+};
+
+const semanticSuccessColors = {
+  success25: '#F6FEF9',
+  success50: '#ECFDF3',
+  success100: '#DCFAE6',
+  success200: '#ABEFC6',
+  success300: '#75E0A7',
+  success400: '#47CD89',
+  success500: '#17B26A',
+  success600: '#079455',
+  success700: '#067647',
+  success800: '#085D3A',
+  success900: '#074D31',
+  success950: '#053321',
+};
+
+const alphaWhiteColors = {
+  alphaWhite: '#FFFFFF',
+  alphaWhite70: 'rgba(255, 255, 255, 0.7)',
+  alphaWhite60: 'rgba(255, 255, 255, 0.6)',
+  alphaWhite20: 'rgba(255, 255, 255, 0.2)',
+  alphaWhite10: 'rgba(243, 244, 246, 10)',
+};
+
+const alphaBlackColors = {
+  alphaBlack: '#000',
+  alphaBlack40: 'rgba(22, 22, 22, 0.4)',
+  alphaBlack50: 'rgba(22, 22, 22, 0.5)',
+};
+
+const textColorsDark = {
+  displayText: alphaWhiteColors.alphaWhite,
+  primaryText: alphaWhiteColors.alphaWhite,
+  secondaryText: alphaWhiteColors.alphaWhite70,
+  tertiaryText: alphaWhiteColors.alphaWhite60,
+  defaultText: neutralColors.gray25,
+  primaryParagraph: alphaWhiteColors.alphaWhite,
+};
+
+const textColorsLight = {
+  displayText: neutralColors.gray800,
+  primaryText: neutralColors.gray950,
+  secondaryText: neutralColors.gray700,
+  tertiaryText: neutralColors.gray600,
+  defaultText: neutralColors.gray1000,
+  primaryParagraph: neutralColors.gray700,
+};
+
+const platformTextColor = {
+  platformPrimaryText: primaryColors.SA800,
+  platformSecondaryText: primaryColors.SA600,
+  platformTertiaryText: primaryColors.SA500,
+};
+
+const sematicTextColors = {
+  errorText: semanticErrorColors.error600,
+  infoText: semanticInfoColors.info600,
+  successText: semanticSuccessColors.success600,
+  warningText: semanticWarningColors.warning700,
+};
+
+const sharedColorPalette = {
+  ...neutralColors,
+  ...primaryColors,
+  ...platformTextColor,
+  ...secondaryGoldColors,
+  ...secondaryLavenderColors,
+  ...semanticErrorColors,
+  ...semanticWarningColors,
+  ...semanticInfoColors,
+  ...semanticSuccessColors,
+  ...sematicTextColors,
+  ...alphaWhiteColors,
+  ...alphaBlackColors,
+  spinner: primaryColors.SA600,
+  iconOnColor: alphaWhiteColors.alphaWhite,
+  iconSuccess: semanticSuccessColors.success700,
+  iconError: semanticErrorColors.error700,
+  iconNatural: neutralColors.gray700,
+  iconPrimary: primaryColors.SA600,
+  tabBarBackground: primaryColors.SA600,
+  radioButtonCircle: neutralColors.gray950,
+};
+
+export const colorsLight = {
+  ...sharedColorPalette,
+  ...textColorsLight,
+  statusBar: alphaWhiteColors.alphaWhite,
+  background: alphaWhiteColors.alphaWhite,
+  grayBackground: neutralColors.gray50,
+  cardBackground: alphaWhiteColors.alphaWhite,
+  overlayBackground: alphaBlackColors.alphaBlack50,
+  animatedHeaderIconBackground: alphaBlackColors.alphaBlack40,
+  webViewBackground: alphaWhiteColors.alphaWhite,
+  shadowColor: 'rgba(16, 24, 40,0.8)',
+  navigationHeaderBorder: neutralColors.gray200,
+  toggleColorDisabled: neutralColors.gray200,
+  toggleColorEnabled: neutralColors.gray500,
+  avatarBorder: alphaWhiteColors.alphaWhite,
+  inputBorder: neutralColors.gray950,
+  focusedInoutBackground: neutralColors.gray100,
+  otpBackground: neutralColors.gray50,
+  contactUsScreenLine: 'rgba(27, 131, 84, 0.25)',
+  transparentIconButton: alphaWhiteColors.alphaWhite10,
+  defaultIconButtonBackground: 'rgba(243, 244, 246, 1)',
+  whiteFadedIconButtonBackground: 'rgba(255, 255, 255, 0.2)',
+  blackFadedIconButtonBackground: 'rgba(22, 22, 22, 0.4)',
+  tabBarActiveTintColor: alphaWhiteColors.alphaWhite,
+  tabBarInactiveTintColor: alphaWhiteColors.alphaWhite70,
+  summaryBackground: neutralColors.gray50,
+  iconDefault: neutralColors.gray1000,
+  secondaryParagraph: neutralColors.gray500,
+} as const;
+
+export const colorsDark = {
+  ...sharedColorPalette,
+  ...textColorsDark,
+  cardBackground: neutralColors.gray700,
+  background: neutralColors.gray800,
+  grayBackground: neutralColors.gray800,
+  statusBar: neutralColors.gray900,
+  overlayBackground: alphaBlackColors.alphaBlack50,
+  animatedHeaderIconBackground: alphaBlackColors.alphaBlack40,
+  webViewBackground: alphaBlackColors.alphaBlack,
+  shadowColor: alphaWhiteColors.alphaWhite70,
+  navigationHeaderBorder: neutralColors.gray700,
+  toggleColorDisabled: colorsLight.gray700,
+  toggleColorEnabled: neutralColors.gray600,
+  avatarBorder: alphaBlackColors.alphaBlack,
+  inputBorder: alphaWhiteColors.alphaWhite,
+  focusedInoutBackground: neutralColors.gray900,
+  otpBackground: neutralColors.gray700,
+  contactUsScreenLine: 'rgba(27, 131, 84, 0.25)',
+  transparentIconButton: alphaBlackColors.alphaBlack40,
+  defaultIconButtonBackground: 'rgba(31, 31, 31, 1)',
+  whiteFadedIconButtonBackground: 'rgba(255, 255, 255, 0.2)',
+  blackFadedIconButtonBackground: 'rgba(0, 0, 0, 0.6)',
+  tabBarActiveTintColor: alphaWhiteColors.alphaWhite,
+  tabBarInactiveTintColor: '#194d35',
+  summaryBackground: neutralColors.gray700,
+  iconDefault: neutralColors.gray10,
+  secondaryParagraph: neutralColors.gray300,
+} as const;
