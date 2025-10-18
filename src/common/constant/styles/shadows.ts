@@ -1,5 +1,5 @@
 import { MMKV_KEYS, THEME_VARIANT } from '@src/common/enum';
-import { getData } from '@src/common';
+import { getData } from '@src/common/utils/MMKStorage';
 
 export type shadowType = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
 export const boxShadow = (type: shadowType) => {

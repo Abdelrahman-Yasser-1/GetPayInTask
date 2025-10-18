@@ -22,12 +22,14 @@ import { useNavigation } from '@react-navigation/native';
 import { TMainStackNavigationProp } from '@src/navigation/types';
 import { useDispatch } from 'react-redux';
 import { setTokens, setIsSuperAdmin } from '@src/store/slices';
+import { useTranslation } from 'react-i18next';
 
 const Login = () => {
   const navigation = useNavigation<TMainStackNavigationProp>();
   const { theme } = useAppTheme();
   const { showInfoToast, showSuccessToast } = useToast();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const [username, setUsername] = useState('oliviaw');
   const [password, setPassword] = useState('oliviawpass');
@@ -66,23 +68,27 @@ const Login = () => {
     let isValid = true;
 
     if (!username.trim()) {
-      setUsernameError('Username is required');
+      setUsernameError(
+        t('validation.fieldRequired', { field: t('auth.username') }),
+      );
       isValid = false;
     } else if (username.trim().length < 3) {
-      setUsernameError('Username must be at least 3 characters');
+      setUsernameError(t('validation.usernameTooShort'));
       isValid = false;
     }
 
     if (!password.trim()) {
-      setPasswordError('Password is required');
+      setPasswordError(
+        t('validation.fieldRequired', { field: t('auth.password') }),
+      );
       isValid = false;
     } else if (password.trim().length < 6) {
-      setPasswordError('Password must be at least 6 characters');
+      setPasswordError(t('validation.passwordTooShort'));
       isValid = false;
     }
 
     return isValid;
-  }, [password, username]);
+  }, [password, t, username]);
 
   const handleLogin = useCallback(() => {
     if (validateForm()) {
@@ -119,9 +125,9 @@ const Login = () => {
   useEffect(() => {
     if (isSuccess) {
       showSuccessToast({
-        message: 'Login successful',
+        message: t('auth.loginSuccess'),
         isClosable: true,
-        description: 'Enjoy your journey',
+        description: t('auth.welcomeMessage'),
       });
       navigation.replace('HomeStack');
       // store accessToken and refresh token in redux
@@ -139,9 +145,9 @@ const Login = () => {
     }
     if (isError) {
       showInfoToast({
-        message: 'Login failed',
+        message: t('auth.loginFailed'),
         isClosable: true,
-        description: 'Please check your credentials and try again.',
+        description: t('auth.checkCredentials'),
       });
     }
   }, [
@@ -153,6 +159,7 @@ const Login = () => {
     navigation,
     showInfoToast,
     showSuccessToast,
+    t,
     username,
   ]);
 
@@ -194,7 +201,7 @@ const Login = () => {
                 color="primaryText"
                 style={styles(theme).welcomeTitle}
               >
-                Welcome Back
+                {t('auth.welcomeBack')}
               </Text>
               <Text
                 textSize="size_16"
@@ -202,15 +209,15 @@ const Login = () => {
                 color="secondaryText"
                 style={styles(theme).welcomeSubtitle}
               >
-                Sign in to your account to continue
+                {t('auth.signInToContinue')}
               </Text>
             </View>
 
             {/* Form Section */}
             <View style={styles(theme).formSection}>
               <TextInput
-                label="Username"
-                placeholder="Enter your username"
+                label={t('auth.username')}
+                placeholder={t('auth.enterUsername')}
                 onChangeText={handleUsernameChange}
                 value={username}
                 startIconName="User"
@@ -222,8 +229,8 @@ const Login = () => {
               />
 
               <TextInput
-                label="Password"
-                placeholder="Enter your password"
+                label={t('auth.password')}
+                placeholder={t('auth.enterPassword')}
                 onChangeText={handlePasswordChange}
                 value={password}
                 startIconName="Lock"
@@ -240,7 +247,7 @@ const Login = () => {
               {/* Forgot Password Link */}
               <TouchableOpacity style={styles(theme).forgotPasswordContainer}>
                 <Text textSize="size_14" fontWight="medium" color="SA600">
-                  Forgot Password?
+                  {t('auth.forgotPassword')}
                 </Text>
               </TouchableOpacity>
             </View>
@@ -248,7 +255,7 @@ const Login = () => {
             {/* Button Section */}
             <View style={styles(theme).buttonSection}>
               <Button
-                title="Sign In"
+                title={t('auth.loginButton')}
                 onPress={handleLogin}
                 isLoading={isLoading}
                 isDisable={

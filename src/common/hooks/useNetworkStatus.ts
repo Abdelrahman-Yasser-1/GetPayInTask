@@ -13,10 +13,10 @@ import {
   setNetworkStatus,
   setConnectionType,
 } from '@src/store/slices';
-import { useToast } from '@src/components';
+// import { useToast } from '@src/components';
 
 export const useNetworkStatus = () => {
-  const { showSuccessToast, showErrorToast } = useToast();
+  // const { showSuccessToast, showErrorToast } = useToast();
   const dispatch = useAppDispatch();
   const isOffline = useIsOffline();
   const isOnline = useIsOnline();
@@ -68,20 +68,20 @@ export const useNetworkStatus = () => {
     }
 
     // Show toast only when network status actually changes
-    if (isOffline) {
-      showErrorToast({
-        message: 'No internet connection',
-        isClosable: true,
-        description: 'Please check your internet connection and try again.',
-      });
-    } else if (networkStatus === 'online') {
-      showSuccessToast({
-        message: 'Internet connection restored',
-        isClosable: true,
-        description: 'You are now connected to the internet.',
-      });
-    }
-  }, [isOffline, networkStatus, showErrorToast, showSuccessToast]);
+    // if (isOffline) {
+    //   showErrorToast({
+    //     message: 'No internet connection',
+    //     isClosable: true,
+    //     description: 'Please check your internet connection and try again.',
+    //   });
+    // } else if (networkStatus === 'online') {
+    //   showSuccessToast({
+    //     message: 'Internet connection restored',
+    //     isClosable: true,
+    //     description: 'You are now connected to the internet.',
+    //   });
+    // }
+  }, [isOffline, networkStatus]);
 
   return {
     isOffline,

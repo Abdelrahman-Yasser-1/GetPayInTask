@@ -6,7 +6,6 @@ import {
 import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack';
 
 export type TMainStackParamList = {
-  Dashboard: undefined;
   AuthStack: NavigatorScreenParams<TAuthStackParamList> | undefined;
   HomeStack: NavigatorScreenParams<THomeBottomTabsParamList> | undefined;
 };
@@ -26,7 +25,7 @@ export type TAuthStackScreenProps<T extends keyof TAuthStackParamList> =
   StackScreenProps<TAuthStackParamList, T>;
 
 export type TDashboardParamList = {
-  Home: undefined;
+  Dashboard: undefined;
   Category: { category: string; categoryName: string };
   ProductDetails: { id: string };
 };

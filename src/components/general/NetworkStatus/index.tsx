@@ -3,11 +3,13 @@ import { View, StyleSheet } from 'react-native';
 import { useNetworkStatus } from '@src/common/hooks/useNetworkStatus';
 import { Icon, Text } from '@src/components';
 import { useAppTheme } from '@src/theme';
-import { px } from '@src/common';
+import { px } from '@src/common/utils';
+import { useTranslation } from 'react-i18next';
 
 const NetworkStatus: React.FC = () => {
   const { isConnected } = useNetworkStatus();
   const { theme } = useAppTheme();
+  const { t } = useTranslation();
 
   if (isConnected) {
     return null; // Don't show anything when connected
@@ -22,7 +24,7 @@ const NetworkStatus: React.FC = () => {
         color="alphaWhite"
         style={styles(theme).text}
       >
-        You're offline
+        {t('network.offline')}
       </Text>
     </View>
   );

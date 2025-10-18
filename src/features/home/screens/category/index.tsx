@@ -19,6 +19,7 @@ import { TDashboardParamList } from '@src/navigation/types';
 import { useAppTheme } from '@src/theme';
 import { useQueryClient } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@src/common/enum';
+import { useTranslation } from 'react-i18next';
 import styles from './styles';
 
 type CategoryScreenRouteProp = RouteProp<TDashboardParamList, 'Category'>;
@@ -32,6 +33,7 @@ const CategoryScreen = () => {
   const { showSuccessToast, showErrorToast } = useToast();
   const { theme } = useAppTheme();
   const queryClient = useQueryClient();
+  const { t } = useTranslation();
 
   const { category, categoryName } = route.params;
 
@@ -41,13 +43,13 @@ const CategoryScreen = () => {
   const { deleteProduct } = useDeleteProduct({
     onSuccess: () => {
       showSuccessToast({
-        message: 'Product deleted successfully',
+        message: t('product.productDeleted'),
         isClosable: true,
       });
     },
     onError: () => {
       showErrorToast({
-        message: 'Failed to delete product',
+        message: t('product.deleteFailed'),
         isClosable: true,
       });
     },
@@ -92,7 +94,7 @@ const CategoryScreen = () => {
       header={
         <NavigationHeader
           title={categoryName}
-          subtitle={`Products in ${categoryName} category`}
+          subtitle={t('category.productsInCategory', { categoryName })}
           startAction={<NavigationAction.Back />}
           endAction={
             <NavigationAction.GridAndListView
@@ -143,7 +145,7 @@ const CategoryScreen = () => {
         {isFetching && filteredProducts.length === 0 && (
           <View style={styles(theme).loadingContainer}>
             <Text textSize="size_16" fontWight="medium" color="gray500">
-              Loading products...
+              {t('dashboard.loadingProducts')}
             </Text>
           </View>
         )}
@@ -152,10 +154,10 @@ const CategoryScreen = () => {
         {!isFetching && filteredProducts.length === 0 && (
           <View style={styles(theme).emptyContainer}>
             <Text textSize="size_18" fontWight="medium" color="gray500">
-              No products found in this category
+              {t('category.noProductsInCategory')}
             </Text>
             <Text textSize="size_14" fontWight="regular" color="gray400">
-              Try refreshing or check back later
+              {t('category.noProductsInCategoryDescription')}
             </Text>
           </View>
         )}

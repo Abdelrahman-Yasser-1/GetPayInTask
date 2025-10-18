@@ -6,15 +6,19 @@ import {
   Text,
 } from '@src/components';
 import { StyleSheet, View } from 'react-native';
-import { gutters, layout } from '@src/common';
+import { gutters } from '@src/common/constant/styles/gutters';
+import { layout } from '@src/common/constant/styles/layout';
+import { useTranslation } from 'react-i18next';
 
 const SignUp = () => {
+  const { t } = useTranslation();
+
   return (
     <MainLayout
       containerVariant="container"
       header={
         <NavigationHeader
-          title="Sign Up"
+          title={t('signUp.title')}
           startAction={<NavigationAction.Back />}
         />
       }
@@ -26,7 +30,7 @@ const SignUp = () => {
           color="primaryText"
           textAlign="center"
         >
-          Sign Up Screen Coming Soon
+          {t('signUp.comingSoon')}
         </Text>
         <Text
           textSize="size_16"
@@ -34,7 +38,7 @@ const SignUp = () => {
           color="secondaryText"
           textAlign="center"
         >
-          Not included in our task, but you can sign up and login to the app.
+          {t('signUp.description')}
         </Text>
       </View>
     </MainLayout>

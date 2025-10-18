@@ -13,6 +13,7 @@ import useGetUserInfo from '@src/features/authentication/hooks/useGetUserInfo';
 import { IGetUserInfoRes } from '@src/types/apiResponse';
 import styles from './styles';
 import useLogout from '@src/common/hooks/useLogout';
+import { useTranslation } from 'react-i18next';
 
 const getUserInitials = (firstName: string, lastName: string) => {
   const firstLetter = firstName?.[0] || '';
@@ -31,6 +32,7 @@ const formatDate = (dateString: string) => {
 const Profile = () => {
   const { logout } = useLogout();
   const { theme } = useAppTheme();
+  const { t } = useTranslation();
   const { getUserInfo, isLoading, isError, data: userData } = useGetUserInfo();
 
   useEffect(() => {
@@ -38,7 +40,7 @@ const Profile = () => {
   }, [getUserInfo]);
 
   const handleEditProfile = () => {
-    console.log('Edit profile pressed');
+    // TODO: Implement edit profile functionality
   };
 
   if (isLoading) {
@@ -47,7 +49,7 @@ const Profile = () => {
         header={
           <View style={styles(theme).headerContainer}>
             <Text textSize="size_20" fontWight="bold" color="primaryText">
-              Profile
+              {t('profile.title')}
             </Text>
           </View>
         }
@@ -60,7 +62,7 @@ const Profile = () => {
             color="gray500"
             style={styles(theme).loadingText}
           >
-            Loading profile...
+            {t('profile.loadingProfile')}
           </Text>
         </View>
       </MainLayout>
@@ -73,7 +75,7 @@ const Profile = () => {
         header={
           <View style={styles(theme).headerContainer}>
             <Text textSize="size_20" fontWight="bold" color="primaryText">
-              Profile
+              {t('profile.title')}
             </Text>
           </View>
         }
@@ -86,7 +88,7 @@ const Profile = () => {
             color="error500"
             style={styles(theme).errorTitle}
           >
-            Failed to load profile
+            {t('profile.errorLoadingProfile')}
           </Text>
           <Text
             textSize="size_14"
@@ -94,10 +96,10 @@ const Profile = () => {
             color="gray500"
             style={styles(theme).errorMessage}
           >
-            {'Something went wrong. Please try again.'}
+            {t('common.error')}
           </Text>
           <Button
-            title="Retry"
+            title={t('profile.retry')}
             variant="primaryBrand"
             size="medium"
             onPress={() => getUserInfo()}
@@ -184,14 +186,14 @@ const Profile = () => {
             color="primaryText"
             style={styles(theme).sectionTitle}
           >
-            Personal Information
+            {t('profile.personalInfo')}
           </Text>
           <View style={styles(theme).infoCard}>
             <View style={styles(theme).infoRow}>
               <Icon name="User" size={20} color="SA600" />
               <View style={styles(theme).infoContent}>
                 <Text textSize="size_12" fontWight="medium" color="gray500">
-                  Full Name
+                  {t('profile.firstName')} {t('profile.lastName')}
                 </Text>
                 <Text
                   textSize="size_16"
@@ -206,7 +208,7 @@ const Profile = () => {
               <Icon name="Calendar" size={20} color="SA600" />
               <View style={styles(theme).infoContent}>
                 <Text textSize="size_12" fontWight="medium" color="gray500">
-                  Birth Date
+                  {t('profile.birthDate')}
                 </Text>
                 <Text
                   textSize="size_16"
@@ -221,7 +223,7 @@ const Profile = () => {
               <Icon name="User" size={20} color="SA600" />
               <View style={styles(theme).infoContent}>
                 <Text textSize="size_12" fontWight="medium" color="gray500">
-                  Gender
+                  {t('profile.gender')}
                 </Text>
                 <Text
                   textSize="size_16"
@@ -236,7 +238,7 @@ const Profile = () => {
               <Icon name="Phone" size={20} color="SA600" />
               <View style={styles(theme).infoContent}>
                 <Text textSize="size_12" fontWight="medium" color="gray500">
-                  Phone
+                  {t('profile.phone')}
                 </Text>
                 <Text
                   textSize="size_16"
@@ -258,14 +260,14 @@ const Profile = () => {
             color="primaryText"
             style={styles(theme).sectionTitle}
           >
-            Physical Information
+            {t('profile.personalInfo')}
           </Text>
           <View style={styles(theme).infoCard}>
             <View style={styles(theme).infoRow}>
               <Icon name="Ruler" size={20} color="SA600" />
               <View style={styles(theme).infoContent}>
                 <Text textSize="size_12" fontWight="medium" color="gray500">
-                  Height
+                  {t('profile.height')}
                 </Text>
                 <Text
                   textSize="size_16"
@@ -280,7 +282,7 @@ const Profile = () => {
               <Icon name="Weight" size={20} color="SA600" />
               <View style={styles(theme).infoContent}>
                 <Text textSize="size_12" fontWight="medium" color="gray500">
-                  Weight
+                  {t('profile.weight')}
                 </Text>
                 <Text
                   textSize="size_16"
@@ -295,7 +297,7 @@ const Profile = () => {
               <Icon name="Eye" size={20} color="SA600" />
               <View style={styles(theme).infoContent}>
                 <Text textSize="size_12" fontWight="medium" color="gray500">
-                  Eye Color
+                  {t('profile.eyeColor')}
                 </Text>
                 <Text
                   textSize="size_16"
@@ -310,7 +312,7 @@ const Profile = () => {
               <Icon name="Heart" size={20} color="SA600" />
               <View style={styles(theme).infoContent}>
                 <Text textSize="size_12" fontWight="medium" color="gray500">
-                  Blood Group
+                  {t('profile.bloodGroup')}
                 </Text>
                 <Text
                   textSize="size_16"
@@ -332,14 +334,14 @@ const Profile = () => {
             color="primaryText"
             style={styles(theme).sectionTitle}
           >
-            Address
+            {t('profile.address')}
           </Text>
           <View style={styles(theme).infoCard}>
             <View style={styles(theme).infoRow}>
               <Icon name="MapPin" size={20} color="SA600" />
               <View style={styles(theme).infoContent}>
                 <Text textSize="size_12" fontWight="medium" color="gray500">
-                  Address
+                  {t('profile.address')}
                 </Text>
                 <Text
                   textSize="size_16"
@@ -354,7 +356,7 @@ const Profile = () => {
               <Icon name="Building" size={20} color="SA600" />
               <View style={styles(theme).infoContent}>
                 <Text textSize="size_12" fontWight="medium" color="gray500">
-                  City
+                  {t('profile.city')}
                 </Text>
                 <Text
                   textSize="size_16"
@@ -369,7 +371,7 @@ const Profile = () => {
               <Icon name="Flag" size={20} color="SA600" />
               <View style={styles(theme).infoContent}>
                 <Text textSize="size_12" fontWight="medium" color="gray500">
-                  Country
+                  {t('profile.country')}
                 </Text>
                 <Text
                   textSize="size_16"
@@ -384,7 +386,7 @@ const Profile = () => {
               <Icon name="Hash" size={20} color="SA600" />
               <View style={styles(theme).infoContent}>
                 <Text textSize="size_12" fontWight="medium" color="gray500">
-                  Postal Code
+                  {t('profile.postalCode')}
                 </Text>
                 <Text
                   textSize="size_16"
@@ -406,14 +408,14 @@ const Profile = () => {
             color="primaryText"
             style={styles(theme).sectionTitle}
           >
-            Work Information
+            {t('profile.companyInfo')}
           </Text>
           <View style={styles(theme).infoCard}>
             <View style={styles(theme).infoRow}>
               <Icon name="Building" size={20} color="SA600" />
               <View style={styles(theme).infoContent}>
                 <Text textSize="size_12" fontWight="medium" color="gray500">
-                  Company
+                  {t('profile.companyName')}
                 </Text>
                 <Text
                   textSize="size_16"
@@ -443,7 +445,7 @@ const Profile = () => {
               <Icon name="Users" size={20} color="SA600" />
               <View style={styles(theme).infoContent}>
                 <Text textSize="size_12" fontWight="medium" color="gray500">
-                  Department
+                  {t('profile.department')}
                 </Text>
                 <Text
                   textSize="size_16"
@@ -458,7 +460,7 @@ const Profile = () => {
               <Icon name="GraduationCap" size={20} color="SA600" />
               <View style={styles(theme).infoContent}>
                 <Text textSize="size_12" fontWight="medium" color="gray500">
-                  University
+                  {t('profile.university')}
                 </Text>
                 <Text
                   textSize="size_16"
@@ -475,7 +477,7 @@ const Profile = () => {
         {/* Action Buttons */}
         <View style={styles(theme).actionSection}>
           <Button
-            title="Logout"
+            title={t('auth.logout')}
             variant="secondarySolid"
             size="large"
             onPress={logout}

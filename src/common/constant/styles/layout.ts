@@ -1,4 +1,4 @@
-import { px } from '@src/common';
+import { px } from '@src/common/utils';
 import { ViewStyle } from 'react-native';
 
 const layout = {

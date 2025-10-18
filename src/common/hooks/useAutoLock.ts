@@ -38,7 +38,6 @@ export const useAutoLock = () => {
   );
 
   const trackUserInteraction = useCallback(() => {
-    console.log('👆 User interaction detected, resetting timer...');
     lastInteractionRef.current = Date.now();
     resetTimer();
   }, [resetTimer]);
@@ -49,7 +48,6 @@ export const useAutoLock = () => {
       'change',
       handleAppStateChange,
     );
-    console.log('🚀 ~ useAutoLock ~ subscription:', subscription);
 
     // Initial timer setup
     // resetTimer();
@@ -64,16 +62,13 @@ export const useAutoLock = () => {
   }, [isLocked, handleAppStateChange, resetTimer]);
 
   const unlockApp = useCallback(() => {
-    console.log('🔓 Unlocking app...');
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
-      console.log('⏰ Timer cleared');
     }
     dispatch(setLocked(false));
     // Reset timer after unlocking
     lastInteractionRef.current = Date.now();
     resetTimer();
-    console.log('✅ App unlocked successfully');
   }, [dispatch, resetTimer]);
 
   return {

@@ -17,6 +17,7 @@ import { useIsSuperAdmin } from '@src/store/selectors';
 import { useToast } from '@src/components';
 import { useQueryClient } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@src/common/enum';
+import { useTranslation } from 'react-i18next';
 import styles from './styles';
 
 const Dashboard = () => {
@@ -26,6 +27,7 @@ const Dashboard = () => {
   const isSuperAdmin = useIsSuperAdmin();
   const { showSuccessToast, showErrorToast } = useToast();
   const queryClient = useQueryClient();
+  const { t } = useTranslation();
 
   const { categoriesData } = useCategories();
   const { productsData, isFetching: isProductsFetching } = useProduct();
@@ -33,13 +35,13 @@ const Dashboard = () => {
   const { deleteProduct } = useDeleteProduct({
     onSuccess: () => {
       showSuccessToast({
-        message: 'Product deleted successfully',
+        message: t('product.productDeleted'),
         isClosable: true,
       });
     },
     onError: () => {
       showErrorToast({
-        message: 'Failed to delete product',
+        message: t('product.deleteFailed'),
         isClosable: true,
       });
     },
@@ -91,8 +93,8 @@ const Dashboard = () => {
       containerVariant="normalView"
       header={
         <NavigationHeader
-          title="Dashboard"
-          subtitle="Discover amazing products"
+          title={t('dashboard.title')}
+          subtitle={t('dashboard.subtitle')}
           endAction={
             <NavigationAction.GridAndListView
               viewType={viewType}
@@ -124,7 +126,7 @@ const Dashboard = () => {
         ) : (
           <View style={styles().categoriesSection}>
             <Text textSize="size_14" fontWight="medium" color="gray500">
-              Loading categories...
+              {t('dashboard.loadingCategories')}
             </Text>
           </View>
         )}
@@ -168,7 +170,7 @@ const Dashboard = () => {
         {isProductsFetching && filteredProducts.length === 0 && (
           <View style={styles().loadingContainer}>
             <Text textSize="size_16" fontWight="medium" color="gray500">
-              Loading products...
+              {t('dashboard.loadingProducts')}
             </Text>
           </View>
         )}
@@ -177,10 +179,10 @@ const Dashboard = () => {
         {!isProductsFetching && filteredProducts.length === 0 && (
           <View style={styles().emptyContainer}>
             <Text textSize="size_18" fontWight="medium" color="gray500">
-              No products found
+              {t('dashboard.noProducts')}
             </Text>
             <Text textSize="size_14" fontWight="regular" color="gray400">
-              Try refreshing or check back later
+              {t('dashboard.noProductsDescription')}
             </Text>
           </View>
         )}

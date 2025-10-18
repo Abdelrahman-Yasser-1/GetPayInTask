@@ -6,10 +6,12 @@ import { setLocked } from '@src/store/slices';
 import { useBiometricAuth } from '../hooks/useBiometricAuth';
 import { Button, MainLayout, Text, TextInput, Icon } from '@src/components';
 import { useAppTheme } from '@src/theme';
+import { useTranslation } from 'react-i18next';
 import styles from './styles';
 
 const LockScreen = () => {
   const { theme } = useAppTheme();
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const isLocked = useLocked();
   const [password, setPassword] = useState('');
@@ -37,19 +39,14 @@ const LockScreen = () => {
   const handleBiometricAuth = async () => {
     if (isUnlocking) return; // Prevent multiple unlock attempts
 
-    console.log('🔐 Starting biometric authentication...');
     const success = await authenticateWithBiometrics();
-    console.log('🔐 Biometric authentication result:', success);
     if (success) {
-      console.log('🔐 Biometric authentication successful, unlocking app...');
       setIsUnlocking(true);
       // Add a small delay to ensure the biometric prompt is fully dismissed
       setTimeout(() => {
         dispatch(setLocked(false)); // Unlock the app
         setIsUnlocking(false);
       }, 100);
-    } else {
-      console.log('🔐 Biometric authentication failed');
     }
   };
 
@@ -65,9 +62,9 @@ const LockScreen = () => {
     }
   };
 
-  // Debug: Log lock state changes
+  // Track lock state changes
   useEffect(() => {
-    console.log('🔒 Lock state changed:', { isLocked, isUnlocking });
+    // Lock state changed
   }, [isLocked, isUnlocking]);
 
   if (!isLocked) {
@@ -95,7 +92,7 @@ const LockScreen = () => {
               color="primaryText"
               style={styles(theme).title}
             >
-              App Locked
+              {t('lockScreen.title')}
             </Text>
 
             <Text
@@ -104,14 +101,18 @@ const LockScreen = () => {
               color="secondaryText"
               style={styles(theme).subtitle}
             >
-              Authenticate to unlock the app
+              {t('lockScreen.subtitle')}
             </Text>
 
             {isBiometricAvailable && (
               <Button
                 onPress={handleBiometricAuth}
                 isDisable={isAuthenticating || isUnlocking}
-                title={isUnlocking ? 'Unlocking...' : 'Use Biometrics'}
+                title={
+                  isUnlocking
+                    ? t('lockScreen.unlocking')
+                    : t('lockScreen.useBiometrics')
+                }
                 variant="primaryBrand"
                 size="large"
                 style={styles(theme).biometricButton}
@@ -126,20 +127,20 @@ const LockScreen = () => {
                 color="gray500"
                 style={styles(theme).dividerText}
               >
-                OR
+                {t('common.or')}
               </Text>
               <View style={styles(theme).dividerLine} />
             </View>
 
             <View style={styles(theme).passwordSection}>
               <Text textSize="size_16" fontWight="medium" color="primaryText">
-                Enter Password
+                {t('lockScreen.enterPassword')}
               </Text>
 
               <TextInput
                 value={password}
                 onChangeText={setPassword}
-                placeholder="Enter your password"
+                placeholder={t('lockScreen.enterPassword')}
                 secureTextEntry
                 autoCapitalize="none"
                 autoCorrect={false}
@@ -147,7 +148,11 @@ const LockScreen = () => {
               />
 
               <Button
-                title={isUnlocking ? 'Unlocking...' : 'Unlock'}
+                title={
+                  isUnlocking
+                    ? t('lockScreen.unlocking')
+                    : t('lockScreen.unlockButton')
+                }
                 onPress={handlePasswordAuth}
                 isLoading={isAuthenticating || isUnlocking}
                 variant="secondarySolid"
